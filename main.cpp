@@ -13,26 +13,23 @@ public:
     float int_rate;
     void create_acc(){
         cout<<"Enter acc. Number: ";
-        void setnum(int n){
-            num=n;
-        }
+        cin>>acc_no;
         cout<<"Enter Name: ";
-        void setname(string n){
-            name=n;
-        }
+        cin.ignore();
+        getline(cin,name);
         cout<<"Enter Account Type: ";
-        void settype(char t){
-            acc_type=t;
+        cin>>acc_type;
+        cout<<"Enter Initial Balance: ";
+        cin>>acc_bal;
+        if(acc_bal<0){
+            acc_bal=0;
+            cout<<"Enter Valid amount!"<<endl;
         }
-        cout<<"Enter Intial Balance: ";
-        void setbal(double bal){
-            if(bal<0){
-                cout<<"enter valid balance!"<<endl;
-            }
-            else
-            acc_bal=bal;
+        else{
+            cout<<"Initial Deposit Successful!"<<endl;
         }
     }
+    
     void deposit(){
         cout<<"Enter amount you want to deposit: ";
         double amt;
@@ -59,8 +56,8 @@ public:
     void display(){
         cout<<"Name: "<<name<<endl;
         cout<<"Account Number: "<<acc_no<<endl;
-        cout<<"Balance: "<<endl;
-        cout<<"Account Type: "<<endl;
+        cout<<"Balance: "<<acc_bal<<endl;
+        cout<<"Account Type: "<<acc_type<<endl;
     }
     void apply_int(){
         cout<<"Enter interest rate: ";
@@ -74,7 +71,7 @@ int main(){
     account accs[10];
     int ch,count=0;
     do{
-        cout<<"ENTER\n 1.CREATE NEW ACCOUNT\n2.DEPOSIT\n3.WITHDRAW\n4.CHECK INTEREST\n5.DISPLAY ALL ACCOUNTS\n6.EXIT\n"<<endl;
+        cout<<"ENTER\n1.CREATE NEW ACCOUNT\n2.DEPOSIT\n3.WITHDRAW\n4.CHECK INTEREST\n5.DISPLAY ACCOUNT DETAILS\n6.EXIT\n"<<endl;
         cin>>ch;
         switch(ch){
             case 1:{
@@ -122,9 +119,10 @@ int main(){
             }
             break;
             case 5:{
-                for(int i=0;i<count;i++){
-                    accs[i].display();
-                }
+                cout<<"Enter Account Number: ";
+                int p;
+                cin>>p;
+                accs[p].display();
             }
             break;
             case 6:exit(1);
